@@ -11,7 +11,7 @@ on:
         required: true
 
 env:
-  REGISTRY: registry.digitalocean.com/jleap-do-docker
+  REGISTRY: registry.hub.docker.com/library/jenleap
   IMAGE_NAME: my-lists-web
 
 jobs:
