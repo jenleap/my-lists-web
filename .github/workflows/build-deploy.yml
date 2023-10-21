@@ -12,7 +12,7 @@ on:
 
 env:
   REGISTRY: registry.digitalocean.com/jleap-do-docker
-  IMAGE_NAME: my-lists-api
+  IMAGE_NAME: my-lists-web
 
 jobs:
   build_and_push:
