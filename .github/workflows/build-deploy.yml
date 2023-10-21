@@ -11,7 +11,7 @@ on:
         required: true
 
 env:
-  REGISTRY: registry.hub.docker.com/library/jenleap
+  REGISTRY: jenleap
   IMAGE_NAME: my-lists-web
 
 jobs:
@@ -29,7 +29,9 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          script: |
+         
+      - name: Push to Docker Hub
+        run: |
             docker push $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
         
   deploy:
