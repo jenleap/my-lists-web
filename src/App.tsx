@@ -1,13 +1,13 @@
-import { Box, Typography } from '@mui/material';
+import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
+import { AppRoutes } from './components/app-routes.component';
 
 function App() {
   return (
-    <Box sx={{ width: '50%', margin: "auto" }}>
-      <Typography variant="h2" sx={{ textAlign: "center"}}>
-        My Lists
-      </Typography>
-    </Box>
+    <BrowserRouter>
+      <AppRoutes/>
+    </BrowserRouter>
+    
   );
 }
 
