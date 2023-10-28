@@ -1,21 +1,38 @@
 import { Alert, Box, Button, Paper, TextField } from "@mui/material";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 export const ResetPassword = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
+    const [success, setSuccess] = useState(false);
 
+    const { tokenId } = useParams();
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (password !== confirmPassword) {
             setMessage("Password does not match.")
         } else {
             const userData = {
                 'email': email,
-                'password': password
+                'newPassword': password,
+                'resetToken': tokenId
             };
+            const res = await fetch("http://localhost:3003/reset", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+           });
+            if (res.ok) {
+                setSuccess(true);
+            } else {
+                setMessage("Error resetting password.")
+            }
         }
     }
 
@@ -50,6 +67,8 @@ export const ResetPassword = () => {
                     {message && <Alert severity="error">{ message }</Alert>}
 
                     <Button sx={{ width: '30%'}} variant="contained" onClick={ handleSubmit }>Reset Password</Button>
+
+                    {success && <Alert severity="success">Password successfully reset.</Alert>}
             </Box>
         </Paper>
         )

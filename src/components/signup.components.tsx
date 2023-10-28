@@ -1,5 +1,6 @@
-import { Alert, Box, Button, Paper, TextField } from "@mui/material";
+import { Alert, Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const SignUp = () => {
     const [email, setEmail] = useState('');
@@ -27,10 +28,11 @@ export const SignUp = () => {
                 },
                 body: JSON.stringify(userData)
            });
-            console.log(res);
-           if (res.ok) {
+
+            const json = await res.json();
+            if (json.token) {
                 setSuccess(true);
-           }
+            }
         }
     }
 
@@ -74,6 +76,10 @@ export const SignUp = () => {
                     <Button sx={{ width: '30%'}} variant="contained" onClick={ handleSubmit }>Sign Up</Button>
 
                     {success && <Alert severity="success">User successfully created!</Alert>}
+
+                    <Link style={{ textDecoration: 'none'}} to={ "forgot-password"}>
+                        <Typography variant="overline">Forgot password?</Typography>
+                    </Link>
             </Box>
         </Paper>
     )
