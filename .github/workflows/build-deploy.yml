@@ -55,7 +55,7 @@ jobs:
             # Remove old container
             docker rm $(echo $IMAGE_NAME)
             # Run a new container from a new image
-            docker run -d -p 3004:3000 \
+            docker run -d -p 3004:80 \
             --env-file /etc/environment \
             --restart always \
             --name $(echo $IMAGE_NAME) \
