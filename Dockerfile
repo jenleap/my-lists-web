@@ -16,7 +16,7 @@ COPY . .
 RUN npm run build
 
 # Use Nginx as the production server
-FROM nginx:alpine
+FROM nginx:1.25.3-alpine
 
 # Copy the built React app to Nginx's web server directory
 COPY --from=build /app/build /usr/share/nginx/html
